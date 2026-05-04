@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/auth-provider";
+import { Sidebar } from "@/components/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GitHub Project Generator",
-  description: "AI-powered Next.js application scaffolding",
+  title: "JobSeed | Strategic AI Architect",
+  description: "Autonomous project synthesis engine for elite engineering teams.",
 };
 
 export default function RootLayout({
@@ -26,10 +27,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        <AuthProvider>{children}</AuthProvider>
+      <body className="min-h-full bg-black text-foreground">
+        <AuthProvider>
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <main className="flex-1 transition-all duration-300">
+              {children}
+            </main>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
